@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP Rút Gọn — Makeup &amp; Stylist | Ngọt Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir:#14100E; --noir-soft:#221C18;
+    --ivory:#F7F3EC; --ivory-2:#EFE9DF;
+    --ghost:rgba(20,16,14,.06);
+    --line:rgba(20,16,14,.12); --line-2:rgba(20,16,14,.20);
+    --sand:#8C6D4F; --sand-lt:#B39476;
+    --ink:#2A231E; --muted:#6B5F55;
+    --red:#A8382E; --green:#3F6B4F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,-apple-system,sans-serif;background:var(--ivory);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  header{background:var(--noir);color:var(--ivory);padding:54px 0 42px}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand-lt);font-weight:600;margin-bottom:18px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(34px,5.2vw,56px);line-height:1.08;letter-spacing:-.01em;margin-bottom:14px}
+  h1 em{font-style:italic;color:var(--sand-lt)}
+  .lede{max-width:660px;color:rgba(247,243,236,.72);font-size:15px}
+
+  /* 4 mang */
+  .mang{background:var(--noir-soft);color:var(--ivory);padding:30px 0 34px}
+  .mang-head{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sand-lt);font-weight:600;margin-bottom:18px}
+  .mang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(247,243,236,.12)}
+  .mg{background:var(--noir-soft);padding:20px 18px}
+  .mg .n{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--sand-lt);margin-bottom:10px}
+  .mg .t{font-weight:800;font-size:15px;margin-bottom:5px;line-height:1.3}
+  .mg .d{font-size:12.5px;color:rgba(247,243,236,.6);line-height:1.55;margin-bottom:10px}
+  .mg .day{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--sand-lt);border-top:1px solid rgba(247,243,236,.14);padding-top:9px}
+
+  .bar{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .bar-in{display:flex;align-items:center;gap:16px;padding:12px 0;flex-wrap:wrap}
+  .tabs{display:flex;flex-wrap:wrap;border:1px solid var(--line-2)}
+  .tab{appearance:none;border:none;background:transparent;cursor:pointer;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:9px 15px;color:var(--muted);transition:.18s}
+  .tab + .tab{border-left:1px solid var(--line-2)}
+  .tab.on{background:var(--noir);color:var(--ivory)}
+  .tab .cnt{font-weight:500;opacity:.6;margin-left:5px}
+  .prog{flex:1;min-width:160px;display:flex;align-items:center;gap:10px}
+  .prog-track{flex:1;height:3px;background:var(--line);position:relative;overflow:hidden}
+  .prog-fill{position:absolute;inset:0;width:0;background:var(--sand);transition:width .3s ease}
+  .prog-num{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .btns{display:flex;gap:8px}
+  .btn{appearance:none;cursor:pointer;font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;padding:8px 14px;border:1px solid var(--line-2);background:transparent;color:var(--ink);transition:.18s}
+  .btn:hover{background:var(--noir);color:var(--ivory);border-color:var(--noir)}
+
+  section{padding:50px 0}
+  .sec-head{margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:18px}
+  .sec-head .lbl{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--sand);font-weight:700;margin-bottom:10px}
+  .sec-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(26px,3.6vw,38px);line-height:1.15}
+  .sec-head h2 em{font-style:italic;color:var(--sand)}
+  .sec-head p{color:var(--muted);font-size:14px;margin-top:8px;max-width:680px}
+
+  .list{display:flex;flex-direction:column;gap:14px}
+  .trk-label{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:var(--sand);padding:16px 0 2px}
+  .card{border:1px solid var(--line-2);background:#fff}
+  .card.done{border-color:rgba(63,107,79,.4);background:rgba(63,107,79,.035)}
+  .card-top{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;cursor:pointer;user-select:none}
+  .chk{flex:none;width:22px;height:22px;margin-top:2px;border:1.5px solid var(--line-2);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s}
+  .chk:hover{border-color:var(--sand)}
+  .chk svg{width:13px;height:13px;opacity:0;transition:.18s}
+  .card.done .chk{background:var(--green);border-color:var(--green)}
+  .card.done .chk svg{opacity:1}
+  .card-id{flex:none;font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1;color:var(--sand);width:44px;padding-top:1px}
+  .card-tt{flex:1;min-width:0}
+  .card-tt h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em;line-height:1.3}
+  .card.done .card-tt h3{color:var(--muted)}
+  .card-tt .sub{font-size:13px;color:var(--muted);margin-top:3px}
+  .card-tag{flex:none;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border:1px solid var(--line-2);color:var(--muted);white-space:nowrap;margin-top:3px}
+  .caret{flex:none;width:18px;margin-top:6px;transition:transform .22s;color:var(--muted)}
+  .card.open .caret{transform:rotate(180deg)}
+  .card-body{display:none;border-top:1px solid var(--line);padding:4px 20px 22px}
+  .card.open .card-body{display:block}
+
+  .blk{padding:18px 0;border-bottom:1px dashed var(--line)}
+  .blk:last-child{border-bottom:none;padding-bottom:0}
+  .blk-h{display:flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--sand);margin-bottom:10px}
+  .blk-h .dot{width:5px;height:5px;background:var(--sand);flex:none}
+  ul.steps{list-style:none;display:flex;flex-direction:column;gap:7px}
+  ul.steps li{position:relative;padding-left:20px;font-size:14.2px;line-height:1.6}
+  ul.steps li::before{content:"";position:absolute;left:4px;top:11px;width:6px;height:1px;background:var(--line-2)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--ghost);padding:2px 6px;border:1px solid var(--line)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12.5px;font-weight:600;padding:5px 11px;background:var(--ivory-2);border:1px solid var(--line)}
+  .chip span{font-weight:500;color:var(--muted)}
+  .mentor{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline}
+  .mentor .who{font-size:15px;font-weight:800}
+  .mentor .when{font-size:13px;color:var(--muted)}
+
+  .out{background:rgba(63,107,79,.06);border-left:2px solid var(--green);padding:14px 16px}
+  .out .blk-h{color:var(--green);margin-bottom:8px}
+  .out .blk-h .dot{background:var(--green)}
+  .out ul.steps li::before{background:rgba(63,107,79,.5)}
+  .fail{margin-top:12px;background:rgba(168,56,46,.05);border-left:2px solid var(--red);padding:12px 16px}
+  .fail .h{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--red);margin-bottom:5px}
+  .fail p{font-size:13.5px;line-height:1.55}
+
+  .tablewrap{display:none;overflow-x:auto;border:1px solid var(--line-2);background:#fff}
+  body.tableview .tablewrap{display:block}
+  body.tableview .list{display:none}
+  table{border-collapse:collapse;width:100%;min-width:960px;font-size:13px}
+  th{background:var(--noir);color:var(--ivory);text-align:left;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:12px 14px;vertical-align:bottom}
+  td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+  tr:last-child td{border-bottom:none}
+  td.n{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--sand);width:46px}
+  td ul{list-style:none}
+  td ul li{position:relative;padding-left:12px;margin-bottom:3px}
+  td ul li::before{content:"·";position:absolute;left:2px;color:var(--sand)}
+  td.out-c{background:rgba(63,107,79,.05)}
+  .trk-row td{background:var(--ivory-2);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:var(--sand)}
+
+  .cc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line-2);border:1px solid var(--line-2)}
+  .cc{background:#fff;padding:17px 18px}
+  .cc .t{font-weight:800;font-size:13.5px;margin-bottom:5px}
+  .cc .d{font-size:13px;color:var(--muted);line-height:1.55}
+  .cc .warn{margin-top:7px;font-size:12.5px;color:var(--red);font-weight:600}
+
+  .never{background:var(--noir);color:var(--ivory)}
+  .never .sec-head{border-color:rgba(247,243,236,.16)}
+  .never .sec-head .lbl{color:var(--red)}
+  .never .sec-head h2 em{color:var(--sand-lt)}
+  .never .sec-head p{color:rgba(247,243,236,.6)}
+  .never-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(247,243,236,.14)}
+  .nv{background:var(--noir);padding:22px 20px}
+  .nv .n{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--red);margin-bottom:8px;letter-spacing:.1em}
+  .nv h4{font-size:15px;font-weight:800;margin-bottom:6px}
+  .nv p{font-size:13px;color:rgba(247,243,236,.6);line-height:1.55}
+
+  footer{background:var(--noir);color:rgba(247,243,236,.5);padding:32px 0;text-align:center;font-size:12.5px}
+  footer .bn{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ivory);margin-bottom:6px}
+
+  @media(max-width:640px){
+    .card-id{width:34px;font-size:21px}
+    .card-tag{display:none}
+    .prog{order:3;flex-basis:100%}
+    .tab{padding:8px 11px;font-size:11px}
+  }
+  @media print{
+    .bar,.btns{display:none}
+    body{font-size:11px;background:#fff}
+    .card-body{display:block!important}
+    .card{break-inside:avoid;border-color:#999}
+    header,.never,footer,.mang{background:#fff!important;color:#000!important}
+    header h1,.never h2,.nv h4,footer .bn,.mg .t{color:#000!important}
+    .lede,.nv p,.never .sec-head p,.mg .d{color:#333!important}
+    th{background:#eee!important;color:#000!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Ngọt Studio · Bản rút gọn cho nhân sự mới</div>
+    <h1>SOP Makeup &amp; Stylist<br><em>4 mảng việc · 8 đầu việc</em></h1>
+    <p class="lede">Viết theo đúng công việc thật của M&amp;S tại Ngọt, không theo lịch trình ca chụp. Mỗi mảng đúng 2 đầu việc — đủ ngắn để nhớ hết mà không cần mở lại tài liệu. Mỗi đầu việc trả lời 4 câu: làm gì — công cụ nào — ai hướng dẫn — thế nào là đạt.</p>
+  </div>
+</header>
+
+<div class="mang">
+  <div class="wrap">
+    <div class="mang-head">4 mảng việc của một chuyên viên M&amp;S</div>
+    <div class="mang-grid">
+      <div class="mg"><div class="n">01</div><div class="t">Makeup</div><div class="d">Chốt layout với khách và làm ra mặt make đạt chuẩn trên ảnh.</div><div class="day">Học ngày 1</div></div>
+      <div class="mg"><div class="n">02</div><div class="t">Hỗ trợ trong ca chụp</div><div class="d">Hai vai cùng lúc: Stylist giữ chỉn chu, Hoạt náo viên giữ cảm xúc.</div><div class="day">Học ngày 2</div></div>
+      <div class="mg"><div class="n">03</div><div class="t">Sắp xếp sau ca</div><div class="d">Trả decor, concept, trang phục, dụng cụ về đúng chuẩn cho ca sau.</div><div class="day">Học ngày 3</div></div>
+      <div class="mg"><div class="n">04</div><div class="t">Hỗ trợ R&amp;D &amp; nâng tay nghề</div><div class="d">Hỗ trợ R&amp;D làm concept mới, và tự tập chụp cùng Photographer.</div><div class="day">Học ngày 3–4</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="bar-in">
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-track="ALL">Tất cả <span class="cnt">8</span></button>
+        <button class="tab" data-track="M">Makeup <span class="cnt">2</span></button>
+        <button class="tab" data-track="H">Hỗ trợ ca <span class="cnt">2</span></button>
+        <button class="tab" data-track="S">Sau ca <span class="cnt">2</span></button>
+        <button class="tab" data-track="R">R&amp;D <span class="cnt">2</span></button>
+      </div>
+      <div class="prog">
+        <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
+        <div class="prog-num" id="pn">0/8</div>
+      </div>
+      <div class="btns">
+        <button class="btn" id="btnView">Dạng bảng</button>
+        <button class="btn" id="btnExpand">Mở tất cả</button>
+        <button class="btn" id="btnPrint">In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="lbl">Quy trình chuẩn</div>
+      <h2>8 Đầu Việc · <em>2 việc mỗi mảng</em></h2>
+      <p>Bấm vào thẻ để mở chi tiết. Tick ô vuông khi đã làm thạo — Lead Team dùng cột Kết quả chuẩn để nghiệm thu ngày thứ 4.</p>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="tablewrap"><table id="tbl"></table></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="lbl">Tra cứu nhanh</div>
+      <h2>Makeup Theo <em>Loại Concept</em></h2>
+      <p>Cùng tay nghề nhưng mỗi loại chụp có yêu cầu khác nhau. Xem bảng này trước khi chạm cọ.</p>
+    </div>
+    <div class="cc-grid">
+      <div class="cc"><div class="t">Baby / Newborn</div><div class="d">Makeup mẹ nhẹ nhàng, tone pastel. Da bé không makeup.</div><div class="warn">Khử trùng kỹ nhất — da sơ sinh nhạy cảm nhất.</div></div>
+      <div class="cc"><div class="t">Gia đình</div><div class="d">Đồng nhất tone cả nhà, tránh một người quá nổi. Tóc gọn, không rối mắt trong khung hình đông người.</div></div>
+      <div class="cc"><div class="t">Bầu / Maternity</div><div class="d">Tôn vẻ rạng rỡ, ấm áp. Tóc chải mượt.</div><div class="warn">Bắt buộc mỹ phẩm an toàn cho bà bầu.</div></div>
+      <div class="cc"><div class="t">Beauty / Lookbook</div><div class="d">Sắc nét hơn hẳn, tóc tạo kiểu bài bản. Đậm vừa đủ để không nhạt trên ảnh.</div></div>
+      <div class="cc"><div class="t">Fine Art</div><div class="d">Trao đổi tone hình với Photographer trước. Makeup phục vụ concept, không phục vụ sở thích cá nhân.</div></div>
+      <div class="cc"><div class="t">Sinh nhật / Sự kiện</div><div class="d">Theo theme, phụ kiện nhiều, màu vui tươi và nổi hơn thường ngày.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="never">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="lbl">Lằn ranh đỏ</div>
+      <h2>5 Điều <em>Tuyệt Đối Không</em></h2>
+      <p>Sai một trong năm điều này không phải "chưa quen việc" — là vi phạm quy trình, phải báo cáo.</p>
+    </div>
+    <div class="never-grid">
+      <div class="nv"><div class="n">01</div><h4>Không dùng dụng cụ chưa khử trùng</h4><p>Khử trùng sau mỗi ca và trước ca mới. Da trẻ sơ sinh và mẹ bầu không có cơ hội sửa sai.</p></div>
+      <div class="nv"><div class="n">02</div><h4>Không bỏ bước hỏi dị ứng</h4><p>Hỏi trước khi chạm cọ đầu tiên, với mọi khách kể cả khách quen. Ghi vào phiếu ca.</p></div>
+      <div class="nv"><div class="n">03</div><h4>Không makeup thêm người khi Sale chưa xác nhận</h4><p>Khách xin makeup thêm cho người nhà — báo Sale xác nhận phụ thu trước, rồi mới làm.</p></div>
+      <div class="nv"><div class="n">04</div><h4>Không tự ý đổi layout đã chốt</h4><p>Muốn đổi phải trao đổi với khách và Photographer. Layout là cam kết chung của cả ca.</p></div>
+      <div class="nv"><div class="n">05</div><h4>Không để set decor bừa cho ca sau</h4><p>Đồ concept không về đúng vị trí là ca sau phải đi tìm, và R&amp;D mất dấu bộ đồ của concept.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="bn">Ngọt Studio</div>
+    <div>SOP Makeup &amp; Stylist · Bản rút gọn theo 4 mảng việc · v2.0-Lite</div>
+    <div style="margin-top:6px">Lưu hành nội bộ · Hà Nội &amp; Việt Trì</div>
+  </div>
+</footer>
+
+<script>
+const DATA = [
+{
+ track:"M", id:"M1", tag:"Trước ca + đầu ca",
+ title:"Chuẩn bị và chốt layout với khách",
+ sub:"Chuẩn bị đúng thì cả ca không phải chạy theo",
+ steps:[
+  "Đọc phiếu ca trên <b>Larkbase</b>: tên khách và tên bé, số concept, <b>layout đã xác nhận</b>, số người cần makeup.",
+  "<b>Khử trùng toàn bộ cọ và dụng cụ</b>, kiểm mỹ phẩm còn đủ và còn hạn, test máy sấy/uốn/duỗi và ring light.",
+  "Chào to, gọi đúng tên khách, mời ngồi vào ghế makeup.",
+  "Thông tin lại layout từng concept và <b>hỏi dị ứng mỹ phẩm</b> — trước khi chạm cọ đầu tiên.",
+  "Khách xin makeup thêm người: <b>báo Sale xác nhận phụ thu trước</b>, không tự quyết."
+ ],
+ tools:[["Larkbase","phiếu ca + layout"],["Bộ khử trùng dụng cụ",""],["Ảnh mẫu layout concept",""],["Zalo — NV Sale phụ trách ca",""]],
+ mentor:["Lead Team M&S","kèm trực tiếp 3 ca đầu"],
+ out:[
+  "Xong chuẩn bị <b>trước ca 15 phút</b>, 100% dụng cụ đã khử trùng.",
+  "Khách <b>xác nhận layout</b> và <b>đã được hỏi dị ứng</b> trước nhát cọ đầu tiên, có ghi vào phiếu ca.",
+  "Mọi yêu cầu makeup thêm người đều có xác nhận của Sale trước khi làm."
+ ],
+ fail:"Vào makeup luôn mà chưa hỏi dị ứng. Không có gì bảo vệ mình khi có sự cố da."
+},
+{
+ track:"M", id:"M2", tag:"Trong ca · makeup + tóc",
+ title:"Làm makeup và tóc — chuẩn nghiệm thu là ảnh chụp test",
+ sub:"Đẹp ngoài đời không đồng nghĩa đẹp trên ảnh",
+ steps:[
+  "Làm <b>sát layout đã chốt</b>, không tự đổi giữa chừng.",
+  "Xử lý cho ánh sáng studio: đủ sáng, <b>không bóng nhờn dưới đèn</b>, không nhạt màu khi lên ảnh.",
+  "Tóc gọn, không che khuất đường nét gương mặt.",
+  "<b>Chụp test và soi trên ảnh</b> trước khi vào chụp chính. Gương không phải chuẩn cuối cùng.",
+  "Dặm lại makeup và tóc giữa các concept.",
+  "Khách chưa ưng: hỏi rõ muốn đổi gì, tư vấn, rồi <b>làm lại đến khi khách hài lòng</b>. Không biện hộ, không cáu."
+ ],
+ tools:[["Mỹ phẩm + cọ đã khử trùng",""],["Ring light + gương bàn makeup",""],["Máy sấy / uốn / duỗi",""],["Ảnh mẫu layout concept",""],["Điện thoại chụp test",""]],
+ mentor:["Lead Team M&S","chấm mặt make 5 ca đầu"],
+ mentor2:["Photographer trong ca","phản hồi makeup lên ảnh"],
+ out:[
+  "Có <b>ảnh chụp test</b> đã kiểm trước khi vào chụp chính — không bóng nhờn, không nhạt màu.",
+  "Makeup đối chiếu được với ảnh mẫu layout của concept.",
+  "Không ca nào khách ra về còn ấm ức về mặt make."
+ ],
+ fail:"Chỉ soi gương rồi báo xong. Makeup bay màu hoặc bệt trên ảnh là hỏng cả bộ, hậu kỳ không cứu được."
+},
+
+{
+ track:"H", id:"H1", tag:"Trong ca · vai Stylist",
+ title:"Stylist — trang phục, phụ kiện và kiểm đồng bộ",
+ sub:"Lỗi trang phục lộ trên ảnh thì hậu kỳ phải sửa tay hoặc bỏ ảnh",
+ steps:[
+  "Trước ca: lấy trang phục đúng concept, <b>là phẳng và treo theo thứ tự sẽ chụp</b>, kiểm size, đủ phụ kiện.",
+  "Tư vấn khách chọn đồ hợp tone concept, hỗ trợ thay nhanh.",
+  "Kiểm chi tiết lên ảnh mới thấy: <b>cổ áo, cài cúc, nếp váy, đường viền, mác áo</b>.",
+  "Mỗi lần đổi concept là kiểm đủ <b>4 thứ: tóc — makeup — trang phục — phụ kiện</b>, đồng bộ 100% rồi mới cho vào khung hình."
+ ],
+ tools:[["Tủ trang phục theo concept",""],["Bộ phụ kiện",""],["Bàn là hơi nước",""],["Ảnh mẫu concept","đối chiếu tone"]],
+ mentor:["Lead Team M&S","hướng dẫn phối đồ theo concept"],
+ mentor2:["Photographer trong ca","xác nhận tone lên ảnh"],
+ out:[
+  "<b>Mỗi lần đổi concept</b> đều có bước kiểm đủ 4 thứ trước khi bấm máy.",
+  "Không lỗi lộ trong ảnh: cúc lệch, cổ áo cong, nếp váy gấp, mác áo lòi.",
+  "Trang phục các concept đã là phẳng và treo đúng thứ tự trước khi khách đến."
+ ],
+ fail:"Bỏ kiểm sau khi thay đồ. Lỗi phát hiện lúc hậu kỳ là quá muộn."
+},
+{
+ track:"H", id:"H2", tag:"Trong ca · vai Hoạt náo viên",
+ title:"Hoạt náo viên — giữ cảm xúc và hỗ trợ Photographer",
+ sub:"Người giữ nhịp cảm xúc của cả buổi chụp",
+ steps:[
+  "<b>Luôn đứng cạnh</b> và quan sát — không chờ Photographer gọi mới sửa hay mới dỗ bé.",
+  "Bé quấy: tạo không khí vui, dùng <b>đồ chơi và nhạc</b> thu hút, phối hợp giữ bé để Photographer bấm nhanh.",
+  "Hướng dẫn khách tạo dáng cơ bản theo <b>Pose Guide</b> để khách bớt gượng.",
+  "Cầm đạo cụ, giữ phụ kiện, hỗ trợ setup phông và ánh sáng khi Photographer cần.",
+  "<b>Hỗ trợ di chuyển an toàn</b> — đặc biệt mẹ bầu và trẻ nhỏ lên xuống đạo cụ.",
+  "Giữ thái độ vui vẻ xuyên suốt, không phụ thuộc tâm trạng cá nhân."
+ ],
+ tools:[["Đồ chơi / nhạc dỗ bé",""],["Bảng Pose Guide",""],["Bộ dặm makeup mang theo",""],["Đạo cụ concept",""]],
+ mentor:["Photographer trong ca","người phối hợp trực tiếp"],
+ mentor2:["Lead Team M&S","quan sát mức độ chủ động"],
+ out:[
+  "Photographer <b>không phải gọi</b> mới có người dỗ bé, sửa tóc, chỉnh đồ.",
+  "Không ảnh nào bị bỏ vì bé không hợp tác mà không ai xử lý.",
+  "Mẹ bầu và trẻ nhỏ luôn có người đỡ khi di chuyển."
+ ],
+ fail:"Đứng ngoài chờ được gọi. Hoạt náo viên là vai chủ động, không phải người trực."
+},
+
+{
+ track:"S", id:"S1", tag:"Sau ca · decor & concept",
+ title:"Trả set decor và concept về đúng chuẩn",
+ sub:"Đây là mảng ảnh hưởng trực tiếp đến ca chụp kế tiếp",
+ steps:[
+  "Tháo set concept vừa dùng, <b>trả từng món đạo cụ, phông, decor về đúng vị trí lưu trữ</b>.",
+  "Đối chiếu với <b>checklist đồ của concept</b> — đủ món, không thiếu, không lẫn sang concept khác.",
+  "Món hỏng, bẩn, gãy: <b>báo ngay trong ca</b>, không treo lại như chưa có gì xảy ra.",
+  "Set sẵn concept đầu tiên của ca kế tiếp nếu lịch đã có.",
+  "Note món cần bổ sung hoặc thay mới để đưa vào đề xuất tuần."
+ ],
+ tools:[["Checklist đồ từng concept",""],["Khu lưu trữ đạo cụ / phông",""],["Larkbase","báo hỏng và đề xuất bổ sung"]],
+ mentor:["Lead Team M&S","hướng dẫn sơ đồ lưu trữ đạo cụ"],
+ out:[
+  "Phòng chụp và khu decor <b>sẵn sàng cho ca sau</b>, không còn đồ của ca trước.",
+  "Đồ của mỗi concept <b>đủ theo checklist</b>, không lẫn sang concept khác.",
+  "Món hỏng được báo <b>trong ca</b>, không để ca sau phát hiện."
+ ],
+ fail:"Để đồ lẫn hoặc sai vị trí. Ca sau mất 15 phút đi tìm và R&D mất dấu bộ đồ của concept."
+},
+{
+ track:"S", id:"S2", tag:"Sau ca · đóng ca",
+ title:"Đóng ca — feedback, dụng cụ, trang phục",
+ sub:"10 phút cuối quyết định ấn tượng cuối của khách",
+ steps:[
+  "Xin feedback: <i>\"Hôm nay makeup chị có hài lòng không ạ? Có gì chị góp ý để em cải thiện nha chị.\"</i> Lắng nghe và cảm ơn.",
+  "Khách có phàn nàn: ghi nhận và <b>báo Lead Team ngay</b>, không giữ lại.",
+  "<b>Khử trùng toàn bộ cọ và dụng cụ đã dùng</b>, vệ sinh bàn makeup, gương, ghế.",
+  "Kiểm trang phục khách vừa trả: bẩn, rách, hỏng thì <b>báo ngay</b>, rồi treo lại đúng vị trí.",
+  "Hỗ trợ khách kiểm lại đồ cá nhân trước khi về.",
+  "Note mỹ phẩm gần hết, hết hạn để đưa vào đề xuất bổ sung tuần."
+ ],
+ tools:[["Bộ khử trùng dụng cụ",""],["Form ghi feedback khách",""],["Giá treo trang phục",""],["Larkbase","note đồ hỏng và mỹ phẩm cần bổ sung"]],
+ mentor:["Lead Team M&S","kèm 3 ca đầu, kiểm khử trùng và tình trạng trang phục"],
+ out:[
+  "<b>Mọi ca đều có feedback</b> được ghi nhận, kể cả feedback tốt.",
+  "<b>100% cọ và dụng cụ đã khử trùng</b> trước khi rời ca.",
+  "Trang phục hư hỏng và mỹ phẩm sắp hết được báo <b>ngay trong ca</b>, không để ca sau phát hiện."
+ ],
+ fail:"Để cọ bẩn lại cho ca sau xử lý. Đây là rủi ro an toàn lớn nhất của bộ phận."
+},
+
+{
+ track:"R", id:"R1", tag:"R&D · vai hỗ trợ",
+ title:"Hỗ trợ bộ phận R&D làm concept mới",
+ sub:"R&D chủ trì concept — M&S lo phần makeup, styling và đồ",
+ steps:[
+  "Nhận brief từ <b>bộ phận R&D</b>: concept gì, tinh thần, tone màu, đối tượng chụp.",
+  "Chuẩn bị <b>trang phục, phụ kiện, đạo cụ</b> theo danh sách R&D đưa. Món chưa có thì báo sớm để R&D xử lý.",
+  "Làm makeup và styling cho buổi set thử theo đúng định hướng của R&D.",
+  "<b>Góp ý từ góc nhìn M&S</b> — thứ chỉ mình biết: đồ này khách mặc có thoải mái không, tóc này giữ được bao lâu, tone này lên da có bị xỉn không.",
+  "Sau buổi thử: nhận <b>ảnh mẫu chuẩn và checklist đồ</b> từ R&D, đưa vào thư viện của M&S để cả team dùng chung."
+ ],
+ tools:[["Brief concept từ R&D",""],["Kho đạo cụ + tủ trang phục",""],["Thư viện concept của M&S","ảnh mẫu + checklist đồ"],["Larkbase","báo thiếu đồ, nhận lịch set thử"]],
+ mentor:["Bộ phận R&D","chủ trì concept, ra brief"],
+ mentor2:["Lead Team M&S","phân công và theo dõi"],
+ out:[
+  "Đồ tập kết <b>đủ trước buổi set thử</b>, không phải hoãn vì thiếu.",
+  "Có <b>ít nhất 1 góp ý thực tế</b> từ góc nhìn M&S cho mỗi concept mới.",
+  "Sau buổi thử, thư viện M&S có <b>ảnh mẫu chuẩn và checklist đồ</b> của concept đó."
+ ],
+ fail:"Chỉ làm theo lệnh mà không góp ý. M&S là người duy nhất biết khách mặc có thoải mái không — im lặng là bỏ phí."
+},
+{
+ track:"R", id:"R2", tag:"R&D · tự nâng tay nghề",
+ title:"Tự lên ý tưởng chụp cùng Photographer để nâng kỹ thuật makeup",
+ sub:"Buổi tập ngoài lịch khách — nơi duy nhất được phép thử và sai",
+ steps:[
+  "Cập nhật xu hướng makeup và thời trang — <b>tối thiểu 1 xu hướng mỗi tuần</b> ghi vào sổ tay.",
+  "Chọn <b>1 kỹ thuật cụ thể muốn nâng</b> trong tháng: da căng bóng, mắt khói, tóc búi, tone cho mẹ bầu…",
+  "Rủ Photographer làm <b>1 buổi chụp thử ngoài lịch khách</b> — tận dụng lúc phòng trống.",
+  "Làm thử, <b>chụp lại và soi trên ảnh</b>, so với lần trước xem đã khá hơn ở điểm nào.",
+  "Layout nào ra tốt thì lưu vào sổ tay và trình Lead — có thể thành đề xuất cho R&D."
+ ],
+ tools:[["Sổ tay mẫu makeup",""],["Nguồn xu hướng: Pinterest, IG, tạp chí",""],["Phòng chụp lúc trống lịch",""],["Photographer","người chụp cùng"]],
+ mentor:["Photographer","phối hợp chụp thử và soi ảnh"],
+ mentor2:["Lead Team M&S","xem kết quả và định hướng kỹ thuật cần nâng"],
+ out:[
+  "Tối thiểu <b>1 buổi tự tập mỗi tháng</b>, có ảnh làm bằng chứng.",
+  "<b>1 xu hướng mới mỗi tuần</b> được ghi vào sổ tay.",
+  "Mỗi quý có ít nhất <b>1 layout tự tập được Lead ghi nhận</b> là dùng được."
+ ],
+ fail:"Chỉ làm layout cũ theo lịch khách. Không có buổi tập thì tay nghề đứng yên, mãi không lên được ca khó."
+}
+];
+
+const TRACK_NAME = {
+  M:"Mảng 1 — Makeup",
+  H:"Mảng 2 — Hỗ trợ trong ca chụp (Stylist & Hoạt náo viên)",
+  S:"Mảng 3 — Sắp xếp decor & concept sau ca",
+  R:"Mảng 4 — Hỗ trợ R&D concept & tự nâng tay nghề"
+};
+const ORDER = ["M","H","S","R"];
+let current = "ALL";
+const done = new Set();
+
+function cardHTML(d){
+  const m2 = d.mentor2 ? `<div class="mentor" style="margin-top:8px"><div class="who">${d.mentor2[0]}</div><div class="when">${d.mentor2[1]}</div></div>` : "";
+  return `
+  <article class="card" data-id="${d.id}">
+    <div class="card-top">
+      <div class="chk" data-chk="${d.id}"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="card-id">${d.id}</div>
+      <div class="card-tt">
+        <h3>${d.title}</h3>
+        <div class="sub">${d.sub}</div>
+      </div>
+      <div class="card-tag">${d.tag}</div>
+      <svg class="caret" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </div>
+    <div class="card-body">
+      <div class="blk">
+        <div class="blk-h"><span class="dot"></span>Làm gì</div>
+        <ul class="steps">${d.steps.map(s=>`<li>${s}</li>`).join("")}</ul>
+      </div>
+      <div class="blk">
+        <div class="blk-h"><span class="dot"></span>Công cụ hỗ trợ</div>
+        <div class="chips">${d.tools.map(t=>`<div class="chip">${t[0]}${t[1]?` <span>· ${t[1]}</span>`:""}</div>`).join("")}</div>
+      </div>
+      <div class="blk">
+        <div class="blk-h"><span class="dot"></span>Ai hướng dẫn</div>
+        <div class="mentor"><div class="who">${d.mentor[0]}</div><div class="when">${d.mentor[1]}</div></div>
+        ${m2}
+      </div>
+      <div class="blk">
+        <div class="out">
+          <div class="blk-h"><span class="dot"></span>Kết quả thế nào là chuẩn</div>
+          <ul class="steps">${d.out.map(s=>`<li>${s}</li>`).join("")}</ul>
+        </div>
+        <div class="fail">
+          <div class="h">Lỗi hay gặp nhất</div>
+          <p>${d.fail}</p>
+        </div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const list = document.getElementById("list");
+  const items = DATA.filter(d => current === "ALL" || d.track === current);
+  let html = "", last = null;
+  items.forEach(d=>{
+    if(current === "ALL" && d.track !== last){
+      html += `<div class="trk-label">${TRACK_NAME[d.track]}</div>`;
+      last = d.track;
+    }
+    html += cardHTML(d);
+  });
+  list.innerHTML = html;
+  document.querySelectorAll(".card").forEach(c=>{
+    if(done.has(c.dataset.id)) c.classList.add("done");
+    if(expanded) c.classList.add("open");
+  });
+  bind();
+  updProg();
+}
+
+function bind(){
+  document.querySelectorAll(".card-top").forEach(t=>{
+    t.addEventListener("click", e=>{
+      if(e.target.closest("[data-chk]")) return;
+      t.parentElement.classList.toggle("open");
+    });
+  });
+  document.querySelectorAll("[data-chk]").forEach(k=>{
+    k.addEventListener("click", e=>{
+      e.stopPropagation();
+      const id = k.dataset.chk, card = k.closest(".card");
+      if(done.has(id)){ done.delete(id); card.classList.remove("done"); }
+      else { done.add(id); card.classList.add("done"); }
+      updProg();
+    });
+  });
+}
+
+function updProg(){
+  document.getElementById("pf").style.width = Math.round(done.size / DATA.length * 100) + "%";
+  document.getElementById("pn").textContent = done.size + "/" + DATA.length;
+}
+
+function renderTable(){
+  const rows = [];
+  ORDER.forEach(tr=>{
+    rows.push(`<tr class="trk-row"><td colspan="6">${TRACK_NAME[tr]}</td></tr>`);
+    DATA.filter(d=>d.track===tr).forEach(d=>{
+      const mentors = [d.mentor].concat(d.mentor2 ? [d.mentor2] : []);
+      rows.push(`<tr>
+        <td class="n">${d.id}</td>
+        <td><b>${d.title}</b><div style="color:var(--muted);font-size:12px;margin-top:3px">${d.tag}</div></td>
+        <td><ul>${d.steps.map(s=>`<li>${s}</li>`).join("")}</ul></td>
+        <td><ul>${d.tools.map(t=>`<li>${t[0]}${t[1]?` (${t[1]})`:""}</li>`).join("")}</ul></td>
+        <td><ul>${mentors.map(m=>`<li><b>${m[0]}</b> — ${m[1]}</li>`).join("")}</ul></td>
+        <td class="out-c"><ul>${d.out.map(s=>`<li>${s}</li>`).join("")}</ul></td>
+      </tr>`);
+    });
+  });
+  document.getElementById("tbl").innerHTML = `
+    <thead><tr>
+      <th></th><th style="width:16%">Đầu việc</th><th style="width:28%">Làm gì</th>
+      <th style="width:13%">Công cụ hỗ trợ</th><th style="width:16%">Ai hướng dẫn</th><th style="width:24%">Kết quả chuẩn</th>
+    </tr></thead><tbody>${rows.join("")}</tbody>`;
+}
+
+document.getElementById("tabs").addEventListener("click", e=>{
+  const b = e.target.closest(".tab"); if(!b) return;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));
+  b.classList.add("on");
+  current = b.dataset.track;
+  render();
+});
+
+let expanded = false;
+document.getElementById("btnExpand").addEventListener("click", e=>{
+  expanded = !expanded;
+  document.querySelectorAll(".card").forEach(c=>c.classList.toggle("open", expanded));
+  e.currentTarget.textContent = expanded ? "Thu gọn tất cả" : "Mở tất cả";
+});
+
+let tableOn = false;
+document.getElementById("btnView").addEventListener("click", e=>{
+  tableOn = !tableOn;
+  document.body.classList.toggle("tableview", tableOn);
+  e.currentTarget.textContent = tableOn ? "Dạng thẻ" : "Dạng bảng";
+});
+
+document.getElementById("btnPrint").addEventListener("click", ()=>window.print());
+
+render();
+renderTable();
+</script>
+</body>
+</html>
